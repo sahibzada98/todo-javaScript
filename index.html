@@ -7,8 +7,40 @@
 
 	<body>
 		<h1> Buttons are below: </h1>
-		<button id="displayTodosButton"> Display Todo </button>
-		<button id="toggleAllButton"> Toggle All </button>
+		
+
+		<div> 
+			<button onclick="handlers.displayTodos()"> Display Todo List
+			</button>
+		</div>
+		<div>
+		<button onclick="handlers.toggleAll()"> Toggle All Todos</button>
+		</div>
+		<div>
+			<button onclick="handlers.addToList()"> Add To List </button>
+			<input id="addTextInput" type="text"> 
+			
+		</div>
+		<div>
+			<button onclick="handlers.changeList()"> Change List, Provide Index and New Text </button>
+			<input id="changeIndexInput" type="number"> 
+			<input id="changeTextInput" type="text">
+			
+		</div>
+
+		<div>
+			<button onclick="handlers.deleteList()"> Delete List, Provide Index and Number of Elements </button>
+			<input id="deleteIndexInput" type="number"> 
+			<input id="deleteQuantityInput" type="number">
+			
+		</div>
+		<div>
+			<button onclick="handlers.toggleCompleted()"> Toggle Completed, Enter Index </button>
+			<input id="toggleIndexInput" type="number"> 
+			
+			
+		</div>
+
 		<script>
 			var todoList = {
 	todos: [],
@@ -71,17 +103,41 @@
 
 };
 
-var displayTodosButton = document.getElementById("displayTodosButton");
-//console.log(displayTodosButton)
-displayTodosButton.addEventListener('click', function(){
-todoList.displayList();
-});
 
-var toggleAllButton = document.getElementById("toggleAllButton");
-toggleAllButton.addEventListener('click', function() {
-	todoList.toggleAll();
-});
 
+var handlers = {
+	displayTodos: function(){
+		todoList.displayList();
+	},
+	toggleAll: function(){
+		todoList.toggleAll();
+	},
+	addToList: function(){
+		var addTextInput = document.getElementById("addTextInput")
+		todoList.addToList(addTextInput.value);
+		addTextInput.value = '';
+	},
+	changeList: function(){
+		var changeIndexInput = document.getElementById("changeIndexInput")
+		var changeTextInput = document.getElementById("changeTextInput")
+		todoList.changeList(changeIndexInput.value, changeTextInput.value)
+		changeTextInput.value = ''
+		changeIndexInput.value = ''
+	},
+	deleteList: function(){
+		var deleteIndexInput = document.getElementById("deleteIndexInput")
+		var deleteQuantityInput = document.getElementById("deleteQuantityInput")
+		todoList.deleteList(deleteIndexInput.value, deleteQuantityInput.value)
+		deleteIndexInput = ''
+		deleteQuantityInput = ''
+
+	},
+	toggleCompleted: function(){
+		var toggleIndexInput = document.getElementById("toggleIndexInput")
+		todoList.toggleCompleted(toggleIndexInput.value);
+		toggleIndexInput.value = '';
+	}
+};
 
 		</script>
 	</body>
