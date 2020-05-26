@@ -11,23 +11,33 @@ console.log(myPerson)
 //Playing around with objects from JS and implementing ways from watchandcode.com
 
 var todoList = {
-	todos: ['item 1','item 2','item 3','item 4'],
-	//numItems: (this.todos).length, //why doesnt this work
+	todos: [],
+	
 	displayList: function(){
 		console.log(this.todos);
+		console.log("Number of items in todo List: ", this.todos.length)
 	},
-	addToList: function(x){
-		console.log(this.todos.push(x))
+	addToList: function(todoText){
+		this.todos.push({
+			todoText: todoText,
+			completed: false
+		});
 	    this.displayList()
 	},
-	changeList: function(index, newElement){
-		this.todos[index] = newElement
+	changeList: function(index, updatedText){
+		this.todos[index].todoText = updatedText
 		this.displayList()
 	},
 	deleteList: function(startIndex, howMany){
 		console.log(this.todos.splice(startIndex, howMany))
 		this.displayList()
+	},
+	toggleCompleted: function(index){
+		var todo = this.todos[index];
+		todo.completed = !todo.completed
+		this.displayList()
 	}
+
 };
 
 
