@@ -6,7 +6,8 @@
 	</head>
 
 	<body>
-		<h1> Buttons are below: </h1>
+		<h1> JavaScript Todo App </h1>
+		<h4>Sahibzada Ahmad Masood </h4>
 		
 
 		<div> 
@@ -40,6 +41,9 @@
 			
 			
 		</div>
+
+		<ul>
+		</ul>
 
 		<script>
 			var todoList = {
@@ -115,6 +119,11 @@ var handlers = {
 	addToList: function(){
 		var addTextInput = document.getElementById("addTextInput")
 		todoList.addToList(addTextInput.value);
+		//var todoUl = document.querySelector('ul');
+		//var todoLi = document.createElement('li');
+		//todoLi.value = addTextInput.value;
+		//todoUl.appendChild(todoLi);
+		view.displayTodos();
 		addTextInput.value = '';
 	},
 	changeList: function(){
@@ -136,6 +145,27 @@ var handlers = {
 		var toggleIndexInput = document.getElementById("toggleIndexInput")
 		todoList.toggleCompleted(toggleIndexInput.value);
 		toggleIndexInput.value = '';
+	}
+};
+
+var view = {
+	displayTodos: function(){
+		var todosUl = document.querySelector('ul');
+		todosUl.innerHTML = '';
+		for (i = 0; i < todoList.todos.length; i++){
+			var todoLi = document.createElement('li');
+			var todo = todoList.todos[i];
+			var todoTextWithCompletion = '';
+
+			if(todo.completed == true){
+				todoTextWithCompletion = '(x)  ' + todo.todoText;
+			} else {
+				todoTextWithCompletion = '( )  ' + todo.todoText;
+			}
+
+			todoLi.textContent = todoTextWithCompletion;
+			todosUl.appendChild(todoLi);
+		}
 	}
 };
 
