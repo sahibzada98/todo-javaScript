@@ -10,10 +10,7 @@
 		<h4>Sahibzada Ahmad Masood </h4>
 		
 
-		<div> 
-			<button onclick="handlers.displayTodos()"> Display Todo List
-			</button>
-		</div>
+		
 		<div>
 		<button onclick="handlers.toggleAll()"> Toggle All Todos</button>
 		</div>
@@ -49,39 +46,22 @@
 			var todoList = {
 	todos: [],
 	
-	displayList: function(){
-		if (this.todos.length == 0){
-			console.log("The todo List is empty.")
-		} else {
-			for (i = 0; i < this.todos.length; i++){
-				if (this.todos[i].completed == false){
-					console.log("( ) ", this.todos[i].todoText)
-				} else {
-					console.log("(x) ",this.todos[i].todoText)
-				}
-			}
-			console.log("Number of items in todo List: ", this.todos.length)
-		}
-	},
+
 	addToList: function(todoText){
 		this.todos.push({
 			todoText: todoText,
 			completed: false
 		});
-	    this.displayList()
 	},
 	changeList: function(index, updatedText){
-		this.todos[index].todoText = updatedText
-		this.displayList()
+		this.todos[index].todoText = updatedText;
 	},
 	deleteList: function(startIndex, howMany){
 		console.log(this.todos.splice(startIndex, howMany))
-		this.displayList()
 	},
 	toggleCompleted: function(index){
 		var todo = this.todos[index];
 		todo.completed = !todo.completed
-		this.displayList()
 	},
 	toggleAll: function(){
 		//if everything is true, make everything false; otherwise make everything true;
@@ -102,7 +82,7 @@
 				this.todos[i].completed = true
 			}
 		}
-		this.displayList()
+		
 	}
 
 };
@@ -110,11 +90,10 @@
 
 
 var handlers = {
-	displayTodos: function(){
-		todoList.displayList();
-	},
+
 	toggleAll: function(){
 		todoList.toggleAll();
+		view.displayTodos();
 	},
 	addToList: function(){
 		var addTextInput = document.getElementById("addTextInput")
@@ -123,8 +102,8 @@ var handlers = {
 		//var todoLi = document.createElement('li');
 		//todoLi.value = addTextInput.value;
 		//todoUl.appendChild(todoLi);
-		view.displayTodos();
 		addTextInput.value = '';
+		view.displayTodos(); // 0----
 	},
 	changeList: function(){
 		var changeIndexInput = document.getElementById("changeIndexInput")
@@ -132,6 +111,7 @@ var handlers = {
 		todoList.changeList(changeIndexInput.value, changeTextInput.value)
 		changeTextInput.value = ''
 		changeIndexInput.value = ''
+		view.displayTodos(); // 0----
 	},
 	deleteList: function(){
 		var deleteIndexInput = document.getElementById("deleteIndexInput")
@@ -139,12 +119,14 @@ var handlers = {
 		todoList.deleteList(deleteIndexInput.value, deleteQuantityInput.value)
 		deleteIndexInput = ''
 		deleteQuantityInput = ''
+		view.displayTodos(); // 0----
 
 	},
 	toggleCompleted: function(){
 		var toggleIndexInput = document.getElementById("toggleIndexInput")
 		todoList.toggleCompleted(toggleIndexInput.value);
 		toggleIndexInput.value = '';
+		view.displayTodos(); // 0----
 	}
 };
 
