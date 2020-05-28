@@ -1,0 +1,11 @@
+Done till version 10;
+
+tasks:
+
+1. do the same thing for toggle as done for delete
+2. understand v9,10
+3. remove toggle button
+4. work on version 11
+5. remove JS code from html and put in script.js and link!
+
+Good job!!!
