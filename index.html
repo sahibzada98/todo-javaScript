@@ -26,12 +26,7 @@
 			
 		</div>
 
-		<div>
-			<button onclick="handlers.deleteList()"> Delete List, Provide Index and Number of Elements </button>
-			<input id="deleteIndexInput" type="number"> 
-			<input id="deleteQuantityInput" type="number">
-			
-		</div>
+		
 		<div>
 			<button onclick="handlers.toggleCompleted()"> Toggle Completed, Enter Index </button>
 			<input id="toggleIndexInput" type="number"> 
@@ -118,12 +113,8 @@ var handlers = {
 		changeIndexInput.value = ''
 		view.displayTodos(); // 0----
 	},
-	deleteList: function(){
-		var deleteIndexInput = document.getElementById("deleteIndexInput")
-		var deleteQuantityInput = document.getElementById("deleteQuantityInput")
-		todoList.deleteList(deleteIndexInput.value, deleteQuantityInput.value)
-		deleteIndexInput = ''
-		deleteQuantityInput = ''
+	deleteList: function(deleteIndex){
+		todoList.deleteList(deleteIndex, 1)
 		view.displayTodos(); // 0----
 
 	},
@@ -159,26 +150,33 @@ var view = {
 	createDeleteButton: function(){
 
 		var deleteButton = document.createElement('button');
-		deleteButton.textContent = "Delete Button";
+		deleteButton.textContent = "X";
 		deleteButton.className = "deleteButton";
 		//variable called delete button
 		// want to return the button
 		return deleteButton;
-	}
-
-};
-
-var todosUl = document.querySelector('ul');
+	},
+	setUpeventListeners: function(){
+		var todosUl = document.querySelector('ul');
 todosUl.addEventListener('click', function(event) {
-	console.log(event.target.parentNode.id);
+	//console.log(event.target.parentNode.id);
 
 	//Get the element that was clicked on
 	var clickedElement = event.target;
 	if (clickedElement.className == 'deleteButton'){
-		
+		//coz we are getting the li as a string and we want to change it to a number
+		handlers.deleteList(parseInt(clickedElement.parentNode.id));
+
+		}
+	});
 
 	}
-});
+
+};
+
+view.setUpeventListeners();
+
+
 
 		</script>
 	</body>
