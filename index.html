@@ -104,6 +104,11 @@ var handlers = {
 		//todoUl.appendChild(todoLi);
 		addTextInput.value = '';
 		view.displayTodos(); // 0----
+
+		//var button = document.createElement("button");
+		//button.innerText = "Do Something";
+		//document.body.appendChild(btn);  
+
 	},
 	changeList: function(){
 		var changeIndexInput = document.getElementById("changeIndexInput")
@@ -145,11 +150,35 @@ var view = {
 				todoTextWithCompletion = '( )  ' + todo.todoText;
 			}
 
+			todoLi.id = i;
 			todoLi.textContent = todoTextWithCompletion;
+			todoLi.appendChild(this.createDeleteButton());
 			todosUl.appendChild(todoLi);
 		}
+	},
+	createDeleteButton: function(){
+
+		var deleteButton = document.createElement('button');
+		deleteButton.textContent = "Delete Button";
+		deleteButton.className = "deleteButton";
+		//variable called delete button
+		// want to return the button
+		return deleteButton;
 	}
+
 };
+
+var todosUl = document.querySelector('ul');
+todosUl.addEventListener('click', function(event) {
+	console.log(event.target.parentNode.id);
+
+	//Get the element that was clicked on
+	var clickedElement = event.target;
+	if (clickedElement.className == 'deleteButton'){
+		
+
+	}
+});
 
 		</script>
 	</body>
