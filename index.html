@@ -26,14 +26,6 @@
 			
 		</div>
 
-		
-		<div>
-			<button onclick="handlers.toggleCompleted()"> Toggle Completed, Enter Index </button>
-			<input id="toggleIndexInput" type="number"> 
-			
-			
-		</div>
-
 		<ul>
 		</ul>
 
@@ -118,10 +110,10 @@ var handlers = {
 		view.displayTodos(); // 0----
 
 	},
-	toggleCompleted: function(){
-		var toggleIndexInput = document.getElementById("toggleIndexInput")
-		todoList.toggleCompleted(toggleIndexInput.value);
-		toggleIndexInput.value = '';
+	toggleCompleted: function(toggleIndex){
+		//var toggleIndexInput = document.getElementById("toggleIndexInput")
+		todoList.toggleCompleted(toggleIndex);
+		//toggleIndexInput.value = '';
 		view.displayTodos(); // 0----
 	}
 };
@@ -144,17 +136,25 @@ var view = {
 			todoLi.id = i;
 			todoLi.textContent = todoTextWithCompletion;
 			todoLi.appendChild(this.createDeleteButton());
+			todoLi.appendChild(this.createToggleButton());
 			todosUl.appendChild(todoLi);
 		}
 	},
 	createDeleteButton: function(){
 
 		var deleteButton = document.createElement('button');
-		deleteButton.textContent = "X";
+		deleteButton.textContent = "Delete";
 		deleteButton.className = "deleteButton";
 		//variable called delete button
 		// want to return the button
 		return deleteButton;
+	},
+	createToggleButton: function(){
+		var toggleButton = document.createElement('button');
+		toggleButton.textContent = "Toggle";
+		toggleButton.className = "toggleButton";
+		return toggleButton;
+
 	},
 	setUpeventListeners: function(){
 		var todosUl = document.querySelector('ul');
@@ -168,8 +168,11 @@ todosUl.addEventListener('click', function(event) {
 		handlers.deleteList(parseInt(clickedElement.parentNode.id));
 
 		}
+		if (clickedElement.className == 'toggleButton'){
+			handlers.toggleCompleted(parseInt(clickedElement.parentNode.id));
+			console.log(clickedElement.parentNode.id);
+		}
 	});
-
 	}
 
 };
