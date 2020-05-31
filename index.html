@@ -3,24 +3,25 @@
 <html>	
 	<head>
 		<title>To do List</title>
+
 	</head>
 
 	<body>
-		<h1> JavaScript Todo App </h1>
-		<h4>Sahibzada Ahmad Masood </h4>
+		<h1>Todo List App</h1>
+		<h4>Sahibzada Ahmad</h4>
 		
 
 		
 		<div>
-		<button onclick="handlers.toggleAll()"> Toggle All Todos</button>
+		<button onclick="handlers.toggleAll()"> Toggle All</button>
 		</div>
 		<div>
-			<button onclick="handlers.addToList()"> Add To List </button>
+			<button onclick="handlers.addToList()"> Add</button>
 			<input id="addTextInput" type="text"> 
 			
 		</div>
 		<div>
-			<button onclick="handlers.changeList()"> Change List, Provide Index and New Text </button>
+			<button onclick="handlers.changeList()"> Change, Provide Index and New Text </button>
 			<input id="changeIndexInput" type="number"> 
 			<input id="changeTextInput" type="text">
 			
@@ -29,158 +30,6 @@
 		<ul>
 		</ul>
 
-		<script>
-			var todoList = {
-	todos: [],
-	
-
-	addToList: function(todoText){
-		this.todos.push({
-			todoText: todoText,
-			completed: false
-		});
-	},
-	changeList: function(index, updatedText){
-		this.todos[index].todoText = updatedText;
-	},
-	deleteList: function(startIndex, howMany){
-		console.log(this.todos.splice(startIndex, howMany))
-	},
-	toggleCompleted: function(index){
-		var todo = this.todos[index];
-		todo.completed = !todo.completed
-	},
-	toggleAll: function(){
-		//if everything is true, make everything false; otherwise make everything true;
-		// so the only case where we change everything to false is when all is true
-		// we can keep a boolean to check if everything is true or not; set to true; 
-		// changes to false as soon as smth is false;
-		// then we put an if(true) loop thru and make all false; else all true
-		check = true
-		for(i = 0; i < this.todos.length; i++){
-			if(this.todos[i].completed == false) check = false
-		}
-		if(check){
-			for(i = 0; i < this.todos.length; i++){
-				this.todos[i].completed = false
-			}
-		} else {
-			for(i = 0; i < this.todos.length; i++){
-				this.todos[i].completed = true
-			}
-		}
-		
-	}
-
-};
-
-
-
-var handlers = {
-
-	toggleAll: function(){
-		todoList.toggleAll();
-		view.displayTodos();
-	},
-	addToList: function(){
-		var addTextInput = document.getElementById("addTextInput")
-		todoList.addToList(addTextInput.value);
-		//var todoUl = document.querySelector('ul');
-		//var todoLi = document.createElement('li');
-		//todoLi.value = addTextInput.value;
-		//todoUl.appendChild(todoLi);
-		addTextInput.value = '';
-		view.displayTodos(); // 0----
-
-		//var button = document.createElement("button");
-		//button.innerText = "Do Something";
-		//document.body.appendChild(btn);  
-
-	},
-	changeList: function(){
-		var changeIndexInput = document.getElementById("changeIndexInput")
-		var changeTextInput = document.getElementById("changeTextInput")
-		todoList.changeList(changeIndexInput.value, changeTextInput.value)
-		changeTextInput.value = ''
-		changeIndexInput.value = ''
-		view.displayTodos(); // 0----
-	},
-	deleteList: function(deleteIndex){
-		todoList.deleteList(deleteIndex, 1)
-		view.displayTodos(); // 0----
-
-	},
-	toggleCompleted: function(toggleIndex){
-		//var toggleIndexInput = document.getElementById("toggleIndexInput")
-		todoList.toggleCompleted(toggleIndex);
-		//toggleIndexInput.value = '';
-		view.displayTodos(); // 0----
-	}
-};
-
-var view = {
-	displayTodos: function(){
-		var todosUl = document.querySelector('ul');
-		todosUl.innerHTML = '';
-		for (i = 0; i < todoList.todos.length; i++){
-			var todoLi = document.createElement('li');
-			var todo = todoList.todos[i];
-			var todoTextWithCompletion = '';
-
-			if(todo.completed == true){
-				todoTextWithCompletion = '(x)  ' + todo.todoText;
-			} else {
-				todoTextWithCompletion = '( )  ' + todo.todoText;
-			}
-
-			todoLi.id = i;
-			todoLi.textContent = todoTextWithCompletion;
-			todoLi.appendChild(this.createDeleteButton());
-			todoLi.appendChild(this.createToggleButton());
-			todosUl.appendChild(todoLi);
-		}
-	},
-	createDeleteButton: function(){
-
-		var deleteButton = document.createElement('button');
-		deleteButton.textContent = "Delete";
-		deleteButton.className = "deleteButton";
-		//variable called delete button
-		// want to return the button
-		return deleteButton;
-	},
-	createToggleButton: function(){
-		var toggleButton = document.createElement('button');
-		toggleButton.textContent = "Toggle";
-		toggleButton.className = "toggleButton";
-		return toggleButton;
-
-	},
-	setUpeventListeners: function(){
-		var todosUl = document.querySelector('ul');
-todosUl.addEventListener('click', function(event) {
-	//console.log(event.target.parentNode.id);
-
-	//Get the element that was clicked on
-	var clickedElement = event.target;
-	if (clickedElement.className == 'deleteButton'){
-		//coz we are getting the li as a string and we want to change it to a number
-		handlers.deleteList(parseInt(clickedElement.parentNode.id));
-
-		}
-		if (clickedElement.className == 'toggleButton'){
-			handlers.toggleCompleted(parseInt(clickedElement.parentNode.id));
-			console.log(clickedElement.parentNode.id);
-		}
-	});
-	}
-
-};
-
-view.setUpeventListeners();
-
-
-
-		</script>
 	</body>
+	<script src="script.js"></script>
 </html>
